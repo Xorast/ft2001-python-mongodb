@@ -46,20 +46,21 @@ def create():
         return render_template('create.html')
 
     if request.method == 'POST':
+
         # GET THE DATA FROM MY FORM (COMING FROM THE CLIENT)
-        title = request.form['title']
+        banana = request.form['banana']
         release_year = request.form['release_year']
         synopsis = request.form['synopsis']
 
         # BUILD MY NEW DOC TO CREATE
-        my_wonderful_new_document = {'title': title,
+        my_wonderful_new_document = {'title': banana,
                                      'release_year': release_year,
                                      'synopsis': synopsis}
 
         # SEND IT TO THE DATABASE
         coll.insert_one(my_wonderful_new_document)
 
-        return render_template('created.html', document=my_wonderful_new_document)
+    return render_template('home.html')
 
 
 # READ
@@ -67,6 +68,14 @@ def create():
 def read():
     documents = coll.find()
     return render_template('read.html', documents=documents)
+
+
+@app.route("/read/<movie_title>")
+def read_one(movie_title):
+    print("*************")
+    print(movie_title)
+    doc = coll.find_one({"title": movie_title})
+    return render_template('read-one.html', doc=doc)
 
 
 # UPDATE

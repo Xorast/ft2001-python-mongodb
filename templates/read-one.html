@@ -20,19 +20,16 @@
 
                 <h1>READ</h1>
 
-                {% for doc in documents %}
 
                     <ul>
-
+                    
                         <li>Id: {{  doc._id }}</li>
                         <li>Title: {{  doc.title }}</li>
                         <li>Release Year: {{  doc.release_year }}</li>
                         <li>Synopsis: {{  doc.synopsis }}</li>
-                        <li>Link to the page for that movie: <a href="/read/{{ doc.title }}">Link</a></li>
 
                     </ul>
 
-                {% endfor %}
 
 
             </div>
